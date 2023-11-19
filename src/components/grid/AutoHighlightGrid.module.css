@@ -1,0 +1,4 @@
+.gridItem:nth-child(3),
+.gridItem:nth-child(6) {
+  grid-row: span 2;
+}
