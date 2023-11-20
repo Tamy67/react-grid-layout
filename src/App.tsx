@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>GridLayout& :&nbsp;Composant de Grille pour React</h1>
+      <h1>GridLayout :&nbsp;Composant de Grille pour React</h1>
       <p>
         {`Un composant React générique écrit en TypeScript, conçu
         pour créer des grilles dynamiques et réactives avec n'importe quel type
