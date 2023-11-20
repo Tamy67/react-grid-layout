@@ -14,5 +14,7 @@ export function createFakeData(): FakerData {
       url: createUniqueImageUrl('nature'),
       alt: faker.lorem.words(3),
     },
+    title: faker.lorem.words(3),
+    description: faker.lorem.words(10),
   };
 }

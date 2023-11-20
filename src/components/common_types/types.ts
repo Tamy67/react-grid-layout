@@ -6,6 +6,8 @@ export type ImageType = {
 export type FakerData = {
   id: number;
   image: ImageType;
+  title?: string;
+  description?: string;
 };
 
 export type DataType = {

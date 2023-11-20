@@ -2,13 +2,16 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  margin: 20px 0;
 }
 
 .gridItem {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  height: 100%;
   overflow: hidden;
 }
 
