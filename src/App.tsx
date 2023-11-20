@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DataType, FakerData } from './components/common_types/types';
 import { createFakeData } from './utils/fakeData';
 import GridLayout from './components/grid/GridLayout';
@@ -6,26 +6,36 @@ import GridLayout from './components/grid/GridLayout';
 function App() {
   const [photos, setPhotos] = useState<DataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const fakerData = Array.from({ length: 12 }, createFakeData);
+  const [fakerData] = useState(() =>
+    Array.from({ length: 12 }, createFakeData)
+  );
+
+  // Memoized callback for fetching photos
+  const fetchPhotos = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/photos'
+      );
+      const json = await response.json();
+      setPhotos(json.slice(0, 12));
+    } catch (error) {
+      setError('Error during photo loading');
+      // eslint-disable-next-line no-console
+      console.error('Error during photo loading', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    async function fetchPhotos() {
-      try {
-        const response = await fetch(
-          'https://jsonplaceholder.typicode.com/photos'
-        );
-        const json = await response.json();
-        setPhotos(json.slice(0, 12));
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Erreur lors du chargement des photos', error);
-        setIsLoading(false);
-      }
-    }
-
     fetchPhotos();
-  }, []);
+  }, [fetchPhotos]);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="container">
@@ -46,9 +56,7 @@ function App() {
         <strong>Personnalisable :&nbsp;</strong> Mise en évidence conditionnelle
         et styles flexibles.
       </p>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
+      {!isLoading && (
         <>
           <GridLayout<FakerData>
             title="1. Grille avec mise en évidence conditionnelle et avec données Faker"

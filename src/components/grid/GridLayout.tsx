@@ -6,6 +6,7 @@ type GridProps<T> = {
   renderItem: (item: T, idx: number) => React.ReactNode;
   title?: string;
   description?: string;
+  isLarge?: (index: number) => boolean;
 };
 
 function GridLayout<T>({
@@ -14,7 +15,7 @@ function GridLayout<T>({
   description,
   renderItem,
   isLarge,
-}: GridProps<T> & { isLarge?: (index: number) => boolean }) {
+}: GridProps<T>) {
   return (
     <>
       {title && <h2>{title}</h2>}

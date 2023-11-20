@@ -27,11 +27,11 @@ module.exports = {
     ],
     "rules": {
         "prettier/prettier": "error",
-        "react/react-in-jsx-scope": "off", // Avec la nouvelle version de React, l'importation de React n'est pas nécessaire dans chaque fichier.
-        "react/prop-types": "off", // Désactivez les prop-types car TypeScript s'en charge.
-        "@typescript-eslint/explicit-module-boundary-types": "off", // Désactivez cette règle si vous ne voulez pas spécifier de type de retour.
-        "no-unused-vars": "warn", // Avertir sur les variables non utilisées.
-        "no-console": "warn", // Avertir sur l'utilisation de console.log.
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }], // Ignore variables starting with an underscore
+        "no-console": process.env.NODE_ENV === 'production' ? "error" : "off" // Allow console in development, error in production
     },
     "settings": {
         "react": {

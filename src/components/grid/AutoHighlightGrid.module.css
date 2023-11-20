@@ -1,4 +1,5 @@
 .gridItem:nth-child(3),
 .gridItem:nth-child(6) {
+  -ms-grid-row-span: 2;
   grid-row: span 2;
 }
